@@ -2,10 +2,13 @@ import React, { useState } from "react"
 import { Button } from "antd"
 import { FloorCreationModal } from "."
 import { Goerli, useEthers } from "@usedapp/core"
+import { FloorItem } from "../utils/type"
 
-export interface IInfiniteTowerProps {}
+export interface IInfiniteTowerProps {
+	floors: FloorItem[]
+}
 
-const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = (props) => {
+const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({ floors }) => {
 	const [isFormModalOpen, setIsFormModalOpen] = useState(false)
 	const { account, chainId } = useEthers()
 
@@ -31,6 +34,8 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = (props) => {
 				isOpen={isFormModalOpen}
 				handleModalClose={handleModalClose}
 			/>
+			
+
 		</>
 	)
 }

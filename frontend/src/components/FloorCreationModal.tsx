@@ -27,7 +27,7 @@ const FloorCreationModal: React.FunctionComponent<IFloorCreationModalProps> = ({
 			values.message,
 			values.link,
 			convertStringToHex(values.color),
-			convertStringToHex(values.windowTint)
+			convertStringToHex(values.windowsTint)
 		)
 	}
 
@@ -73,7 +73,7 @@ const FloorCreationModal: React.FunctionComponent<IFloorCreationModalProps> = ({
 					<Input type="color" />
 				</Form.Item>
 				<Form.Item
-					name="windowTint"
+					name="windowsTint"
 					label="Window Tinit"
 					rules={[{ required: true }]}
 				>

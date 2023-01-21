@@ -1,5 +1,5 @@
 import { useContractFunction } from "@usedapp/core"
-import { contract } from "."
+import { contract } from "../utils/config"
 
 export const useCreateFloor = () => {
 	const { state, send } = useContractFunction(contract, "createFloor")
