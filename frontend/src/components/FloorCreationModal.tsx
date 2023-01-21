@@ -1,5 +1,7 @@
-import React, { FormEvent } from "react"
+import React, { FormEvent, useEffect } from "react"
 import { Modal, Form, Input, Button } from "antd"
+import { useCreateFloor } from "../hooks/useCreateFloor"
+import { convertStringToHex } from "../utils/helper"
 
 export interface IFloorCreationModalProps {
 	isOpen: boolean
@@ -11,15 +13,29 @@ const FloorCreationModal: React.FunctionComponent<IFloorCreationModalProps> = ({
 	handleModalClose,
 }) => {
 	const [form] = Form.useForm()
+	const { send, loading, error, success } = useCreateFloor()
 
 	const layout = {
 		labelCol: { span: 6 },
 		wrapperCol: { span: 24 },
 	}
 
-	const onFinish = (values: any) => {
+	const onFinish = async (values: any) => {
 		console.log(values)
+		await send(
+			values.ownerName,
+			values.message,
+			values.link,
+			convertStringToHex(values.color),
+			convertStringToHex(values.windowTint)
+		)
 	}
+
+	useEffect(() => {
+		if (success) {
+			handleModalClose()
+		}
+	}, [success])
 
 	return (
 		<Modal
