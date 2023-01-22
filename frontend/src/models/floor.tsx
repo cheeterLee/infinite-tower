@@ -33,7 +33,7 @@ export const Floor = ({
 	...props
 }: GroupProps & FloorProps) => {
 	const { nodes, materials } = useGLTF(
-		"./src/models/InfinityTower.gltf"
+		"./InfinityTower.gltf"
 	) as unknown as GLTFResult
 	return (
 		<group {...props} dispose={null}>
