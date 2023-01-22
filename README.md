@@ -8,5 +8,6 @@
 ![Ethereum](https://img.shields.io/badge/Ethereum-3C3C3D.svg?style=for-the-badge&logo=Ethereum&logoColor=white)
 
 - Mint yourself a 3D floor as digital asset on Goerli Test Network :)
+- Deployed at https://infinitetower.netlify.app/
 
 ![image](https://user-images.githubusercontent.com/87960642/213911758-877ccc0b-92eb-4319-9a06-8411cbc98796.png)
