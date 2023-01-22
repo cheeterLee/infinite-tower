@@ -19,15 +19,14 @@ const ScrollableGroup: React.FunctionComponent<IScrollableGroupProps> = ({
 		if (!ref.current) {
 			return
 		}
-        ref.current.position.y = scroll
-		// ref.current.position.y = THREE.MathUtils.lerp(
-		// 	ref.current.position.y,
-		// 	-0.72 - (scroll / size.height) * 2,
-		// 	0.065
-		// )
-		// if (rotationSpeed) {
-		// 	ref.current.rotation.y = clock.getElapsedTime() * rotationSpeed
-		// }
+		ref.current.position.y = THREE.MathUtils.lerp(
+			ref.current.position.y,
+			-0.72 - (scroll / size.height) * 2,
+			0.065
+		)
+		if (rotationSpeed) {
+			ref.current.rotation.y = clock.getElapsedTime() * rotationSpeed
+		}
 	})
 
 	return (

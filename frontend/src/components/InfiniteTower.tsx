@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Card, Space, Badge, Typography } from "antd"
 import { FloorCreationModal } from "."
 import { Goerli, useEthers } from "@usedapp/core"
@@ -18,14 +18,24 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 }) => {
 	const [isFormModalOpen, setIsFormModalOpen] = useState(false)
 	const { account, chainId } = useEthers()
+
 	const [scrollPosition, setScrollPosition] = useState(0)
 	const handleScroll = () => {
-		const position = window.pageYOffset
+		const position = window.scrollY
 		setScrollPosition(position)
+
 	}
+	
 
 	const handleModalOpen = () => setIsFormModalOpen(true)
 	const handleModalClose = () => setIsFormModalOpen(false)
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll, { passive: true })
+		return () => {
+			window.removeEventListener("scroll", handleScroll)
+		}
+	}, [])
 
 	return (
 		<>
@@ -73,7 +83,7 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 				>
 					<Badge.Ribbon
 						color="cyan"
-						text={`#${index} floor`}
+						text={`#${index + 1} floor`}
 						placement="start"
 					>
 						<Card
