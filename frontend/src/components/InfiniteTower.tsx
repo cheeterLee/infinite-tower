@@ -6,6 +6,8 @@ import { FloorItem } from "../utils/type"
 import { Canvas } from "@react-three/fiber"
 import { Floor } from "../models/floor"
 import ScrollableGroup from "./ScrollableGroup"
+import { ContactShadows } from "@react-three/drei"
+import { EffectComposer, Noise } from "@react-three/postprocessing"
 
 const { Text, Link, Paragraph } = Typography
 
@@ -23,9 +25,7 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 	const handleScroll = () => {
 		const position = window.scrollY
 		setScrollPosition(position)
-
 	}
-	
 
 	const handleModalOpen = () => setIsFormModalOpen(true)
 	const handleModalClose = () => setIsFormModalOpen(false)
@@ -48,14 +48,23 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 						far: 100,
 					}}
 				>
-					<ambientLight intensity={0.5} />
-					<pointLight position={[20, 30, 10]} />
-					<pointLight position={[-10, -10, -10]} color="blue" />
-					<spotLight
-						position={[-2, 1, 32]}
-						angle={0.2}
-						intensity={1}
-					/>
+					<ScrollableGroup scroll={scrollPosition}>
+						<ambientLight intensity={0.5} />
+						<pointLight position={[20, 30, 10]} />
+						<pointLight position={[-10, -10, -10]} color="blue" />
+						<spotLight
+							position={[-2, 1, 32]}
+							angle={0.2}
+							intensity={1}
+						/>
+						<ContactShadows
+							scale={12}
+							blur={4}
+							opacity={1}
+							far={100}
+							position={[0, -0.001, 0]}
+						/>
+					</ScrollableGroup>
 					<ScrollableGroup scroll={scrollPosition}>
 						{floors.map((floor, index) => (
 							<Floor
@@ -67,6 +76,9 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 							/>
 						))}
 					</ScrollableGroup>
+					<EffectComposer>
+						<Noise opacity={0.08} />
+					</EffectComposer>
 				</Canvas>
 			</div>
 
