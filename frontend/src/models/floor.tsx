@@ -8,6 +8,7 @@ import React, { useRef } from "react"
 import { useGLTF } from "@react-three/drei"
 import { GLTF } from "three-stdlib"
 import { GroupProps } from "@react-three/fiber"
+// @ts-ignore 
 import modelSrc from './InfinityTower.gltf' // 💩
 
 type GLTFResult = GLTF & {
@@ -73,4 +74,4 @@ export const Floor = ({
 	)
 }
 
-useGLTF.preload("/InfinityTower.gltf")
+useGLTF.preload(modelSrc)
