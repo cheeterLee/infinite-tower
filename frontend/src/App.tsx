@@ -9,10 +9,10 @@ function App() {
 	// console.log('floors', floors)
 
 	return (
-		<Layout style={{ width: "100vw" }}>
+		<>
 			<Navbar />
 			{!ethereum ? <WalletInstall /> : <InfiniteTower floors={floors} />}
-		</Layout>
+		</>
 	)
 }
 

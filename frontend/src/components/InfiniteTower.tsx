@@ -1,10 +1,12 @@
 import React, { useState } from "react"
-import { Button } from "antd"
+import { Button, Card, Space, Badge, Typography } from "antd"
 import { FloorCreationModal } from "."
 import { Goerli, useEthers } from "@usedapp/core"
 import { FloorItem } from "../utils/type"
 import { Canvas } from "@react-three/fiber"
 import { Floor } from "../models/floor"
+
+const { Text, Link, Paragraph } = Typography
 
 export interface IInfiniteTowerProps {
 	floors: FloorItem[]
@@ -49,6 +51,35 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 					))}
 				</Canvas>
 			</div>
+			{floors.map((floor, index) => (
+				// <Space key={index} style={{ width: '300px' }}>
+					<Badge.Ribbon
+						color="cyan"
+						text={`#${index} floor`}
+						placement="start"
+					>
+						<Card
+							style={{
+								width: "300px",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								textAlign: 'center'
+							}}
+						>
+							<Paragraph>
+								<Text strong>{`owner: ${floor.ownerName}`}</Text>
+							</Paragraph>
+							<Paragraph>
+								<Text>{floor.message}</Text>
+							</Paragraph>
+							<Link href={floor.link} target="_blank">
+								{floor.link}
+							</Link>
+						</Card>
+					</Badge.Ribbon>
+				// </Space>
+			))}
 
 			<Button
 				onClick={() => handleModalOpen()}

@@ -53,14 +53,21 @@ export const Floor = ({
 				castShadow
 				receiveShadow
 				geometry={nodes.Cylinder_1.geometry}
-				material={materials.Glass}
-			/>
+			>
+        <meshPhongMaterial
+          color={windowsTint}
+          transparent
+          opacity={0.7}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
 			<mesh
 				castShadow
 				receiveShadow
 				geometry={nodes.Cylinder_2.geometry}
-				material={materials.Metal}
-			/>
+			>
+        <meshStandardMaterial metalness={0.8} roughness={0.4} color='#888888' />
+      </mesh>
 		</group>
 	)
 }

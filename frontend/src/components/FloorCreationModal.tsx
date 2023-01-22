@@ -50,7 +50,7 @@ const FloorCreationModal: React.FunctionComponent<IFloorCreationModalProps> = ({
 				form={form}
 				style={{ margin: "1.5rem" }}
 				onFinish={onFinish}
-                initialValues={{ color: '#ffe7ba', windowTint: '#ffe7ba' }}
+                initialValues={{ ownerName: '', message: '', link: '', color: '#ffe7ba', windowTint: '#ffe7ba' }}
 			>
 				<Form.Item
 					name="ownerName"
