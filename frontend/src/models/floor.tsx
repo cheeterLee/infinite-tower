@@ -8,6 +8,7 @@ import React, { useRef } from "react"
 import { useGLTF } from "@react-three/drei"
 import { GLTF } from "three-stdlib"
 import { GroupProps } from "@react-three/fiber"
+import modelSrc from './InfinityTower.gltf' // 💩
 
 type GLTFResult = GLTF & {
 	nodes: {
@@ -33,7 +34,7 @@ export const Floor = ({
 	...props
 }: GroupProps & FloorProps) => {
 	const { nodes, materials } = useGLTF(
-		"./InfinityTower.gltf"
+		modelSrc
 	) as unknown as GLTFResult
 	return (
 		<group {...props} dispose={null}>
