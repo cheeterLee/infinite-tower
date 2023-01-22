@@ -5,6 +5,7 @@ import { Goerli, useEthers } from "@usedapp/core"
 import { FloorItem } from "../utils/type"
 import { Canvas } from "@react-three/fiber"
 import { Floor } from "../models/floor"
+import ScrollableGroup from "./ScrollableGroup"
 
 const { Text, Link, Paragraph } = Typography
 
@@ -17,6 +18,11 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 }) => {
 	const [isFormModalOpen, setIsFormModalOpen] = useState(false)
 	const { account, chainId } = useEthers()
+	const [scrollPosition, setScrollPosition] = useState(0)
+	const handleScroll = () => {
+		const position = window.pageYOffset
+		setScrollPosition(position)
+	}
 
 	const handleModalOpen = () => setIsFormModalOpen(true)
 	const handleModalClose = () => setIsFormModalOpen(false)
@@ -40,19 +46,31 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 						angle={0.2}
 						intensity={1}
 					/>
-					{floors.map((floor, index) => (
-						<Floor
-							position={[0, index * 2, 0]}
-							rotation={[0, Math.PI * index * 0.08, 0]}
-							key={index}
-							color={floor.color}
-							windowsTint={floor.windowsTint}
-						/>
-					))}
+					<ScrollableGroup scroll={scrollPosition}>
+						{floors.map((floor, index) => (
+							<Floor
+								position={[0, index * 2, 0]}
+								rotation={[0, Math.PI * index * 0.08, 0]}
+								key={index}
+								color={floor.color}
+								windowsTint={floor.windowsTint}
+							/>
+						))}
+					</ScrollableGroup>
 				</Canvas>
 			</div>
+
 			{floors.map((floor, index) => (
-				// <Space key={index} style={{ width: '300px' }}>
+				<Space
+					key={index}
+					style={{
+						height: "100vh",
+						width: "100vw",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "flex-end",
+					}}
+				>
 					<Badge.Ribbon
 						color="cyan"
 						text={`#${index} floor`}
@@ -64,11 +82,13 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 								display: "flex",
 								flexDirection: "column",
 								alignItems: "center",
-								textAlign: 'center'
+								textAlign: "center",
 							}}
 						>
 							<Paragraph>
-								<Text strong>{`owner: ${floor.ownerName}`}</Text>
+								<Text
+									strong
+								>{`owner: ${floor.ownerName}`}</Text>
 							</Paragraph>
 							<Paragraph>
 								<Text>{floor.message}</Text>
@@ -78,7 +98,7 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 							</Link>
 						</Card>
 					</Badge.Ribbon>
-				// </Space>
+				</Space>
 			))}
 
 			<Button
