@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect } from "react"
 import { Modal, Form, Input, Button } from "antd"
 import { useCreateFloor } from "../hooks/useCreateFloor"
 import { convertStringToHex } from "../utils/helper"
+import { toast } from "react-hot-toast"
 
 export interface IFloorCreationModalProps {
 	isOpen: boolean
@@ -22,20 +23,21 @@ const FloorCreationModal: React.FunctionComponent<IFloorCreationModalProps> = ({
 
 	const onFinish = async (values: any) => {
 		console.log(values)
-		await send(
-			values.ownerName,
-			values.message,
-			values.link,
-			convertStringToHex(values.color),
-			convertStringToHex(values.windowsTint)
-		)
-	}
-
-	useEffect(() => {
-		if (success) {
-			handleModalClose()
+		try {
+			await send(
+				values.ownerName,
+				values.message,
+				values.link,
+				convertStringToHex(values.color),
+				convertStringToHex(values.windowsTint)
+			)
+			toast.success("Successfully minted! Refresh to see :)")
+		} catch (error) {
+			console.log(error)
+			toast.error("An error occurred :(")
 		}
-	}, [success])
+		handleModalClose()
+	}
 
 	return (
 		<Modal
@@ -80,7 +82,7 @@ const FloorCreationModal: React.FunctionComponent<IFloorCreationModalProps> = ({
 					<Input type="color" />
 				</Form.Item>
 				<Form.Item>
-					<Button block htmlType="submit">
+					<Button block htmlType="submit" loading={loading} >
 						Submit
 					</Button>
 				</Form.Item>

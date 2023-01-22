@@ -17,6 +17,9 @@ const Navbar: React.FunctionComponent<INavbarProps> = (props) => {
 				alignItems: "center",
 				justifyContent: "space-between",
 				padding: "2.5rem 4rem",
+				position: 'sticky',
+				top: '0',
+				zIndex: 1
 			}}
 		>
 			<Title level={1} style={{ margin: 0, color: "#fafafa" }}>

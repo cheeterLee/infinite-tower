@@ -76,9 +76,9 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 							/>
 						))}
 					</ScrollableGroup>
-					<EffectComposer>
+					{/* <EffectComposer> // this decreased perfermance too much zzz...
 						<Noise opacity={0.08} />
-					</EffectComposer>
+					</EffectComposer> */}
 				</Canvas>
 			</div>
 
@@ -126,9 +126,10 @@ const InfiniteTower: React.FunctionComponent<IInfiniteTowerProps> = ({
 			<Button
 				onClick={() => handleModalOpen()}
 				type="primary"
+				size="large"
 				disabled={!account || chainId !== Goerli.chainId}
 				style={{
-					width: "10rem",
+					width: "12rem",
 					position: "fixed",
 					bottom: "3rem",
 					right: "3rem",
