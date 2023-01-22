@@ -6,7 +6,7 @@ import { useFloorInfo } from "./hooks/useFloorInfo"
 function App() {
 	const { ethereum } = window as any
 	const { floors } = useFloorInfo()
-	console.log('floors', floors)
+	// console.log('floors', floors)
 
 	return (
 		<Layout style={{ width: "100vw" }}>
